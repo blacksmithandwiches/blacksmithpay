@@ -4,7 +4,7 @@
 
 BlacksmithPay is a payment app with a familiar send/request flow:
 accounts with CAD and USD balances, payment links anyone can pay,
-MetaMask built in for crypto, and an exchange between fiat and
+Ethereum crypto with any wallet (or the built-in demo wallet), and an exchange between fiat and
 crypto — with every fee shown up front, before you confirm. No
 hidden charges, ever.
 
@@ -45,7 +45,8 @@ no promises — just a front-row seat and our thanks.
 # BlacksmithPay — P1 Prototype (developer notes)
 
 Dmitri's payment app: a familiar send/request wallet flow for fiat
-(CAD + USD) with MetaMask built in for crypto, plus an exchange
+(CAD + USD) with Ethereum crypto — any wallet, or the built-in demo
+wallet — plus an exchange
 between the two and demo payment links. **TEST MONEY ONLY
 throughout.** No real funds, no real payment rails, no signups, no
 API keys.
@@ -77,18 +78,30 @@ updated Nov 9, 2026).
   link for an amount in CAD/USD, then "Pay (simulate)": the seller
   balance is credited minus the seller fee, which lands in revenue.
 - **Crypto send** (`src/components/CryptoSend.tsx`) — a real Sepolia
-  testnet ETH send via wagmi `sendTransaction` when MetaMask is
-  connected, with the transaction hash and a Sepolia Etherscan link
-  shown after sending. Disabled-with-explanation when not connected.
+  testnet ETH send, from the connected wallet (wagmi
+  `sendTransaction`) or from the built-in demo wallet (viem signs
+  locally), chosen in the form. Transaction hash and a Sepolia
+  Etherscan link are shown after sending. Disabled-with-explanation
+  when neither wallet is available.
 - **Revenue counter** (`src/components/RevenueCard.tsx`,
   `src/lib/fees.ts`) — every fee accrues per currency to "BlacksmithPay
   revenue (test)" on the wallet home.
-- **MetaMask connect** (`src/lib/wagmi.ts`,
+- **Wallet connect** (`src/lib/wagmi.ts`,
   `src/components/ConnectButton.tsx`) — wagmi + viem, Sepolia testnet
-  only, using the injected connector: no WalletConnect project ID or
-  API key needed. When connected, the crypto card shows the wallet's
-  live Sepolia ETH balance and address; when not connected it shows a
-  graceful placeholder.
+  only. Wallet-agnostic: the injected connector accepts any browser
+  wallet (MetaMask is only an example); a WalletConnect connector
+  joins automatically when `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` is
+  set (free project ID, registered under Dmitri's own account — not
+  yet registered). When connected, the crypto card shows the wallet's
+  live Sepolia ETH balance and address.
+- **Built-in demo wallet** (`src/lib/demoWallet.ts`,
+  `src/components/DemoWalletPanel.tsx`) — a throwaway Sepolia account
+  created in the browser: key generated locally, stored only in
+  localStorage, never exported (deliberately no export in v1). Shows
+  its address and live Sepolia balance, links to public faucets, can
+  send test ETH, and can be removed (key deleted). When no external
+  wallet is connected, the crypto card shows the demo wallet's
+  balance, labelled as such.
 - **TEST-money labelling everywhere** — banner, cards, modal, footer.
 
 ## How to run
@@ -101,9 +114,11 @@ npm run dev   # http://localhost:3000
 
 Other scripts: `npm run build`, `npm start`, `npm run typecheck`.
 
-To see the crypto card work: install MetaMask in the browser, switch
-it to the Sepolia network, click **Connect MetaMask**. Test ETH comes
-from any Sepolia faucet (free, no value).
+To see the crypto card work, two ways: (1) create the built-in demo
+wallet on the home page — nothing to install; or (2) install any
+Ethereum browser wallet (for example MetaMask), switch it to the
+Sepolia network, and click **Connect wallet**. Test ETH comes from
+any Sepolia faucet (free, no value).
 
 ## Fee schedule (prototype — all fees shown BEFORE confirming)
 
@@ -125,8 +140,8 @@ gas fee, which goes to the Ethereum network — never to BlacksmithPay.
 | --------------- | --------------------------------------------------------- |
 | CAD / USD       | **Mock.** Numbers in localStorage; nothing real moves.    |
 | Send / Request  | **Mock flow.** Adjusts the mock ledger only (fee applies). |
-| Crypto balance  | **Real read, test network.** Live Sepolia balance via MetaMask. |
-| Crypto send     | **Built.** Real Sepolia testnet send via MetaMask.        |
+| Crypto balance  | **Real read, test network.** Live Sepolia balance via the connected wallet, or the built-in demo wallet. |
+| Crypto send     | **Built.** Real Sepolia testnet send via the connected wallet or the built-in demo wallet. |
 | Exchange        | **Built.** Mock rates; ETH (demo) in the mock ledger.     |
 | Payment links   | **Built.** Demo links, simulated payment, seller fee.     |
 | Accounts/sign-in| Not built yet (blueprint P1 item).                        |

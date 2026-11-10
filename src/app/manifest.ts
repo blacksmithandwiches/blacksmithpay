@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "BlacksmithPay",
     short_name: "BlacksmithPay",
     description:
-      "BlacksmithPay prototype — send and request test money, fiat-style balances plus MetaMask on Sepolia testnet. TEST MONEY ONLY: no real money moves in this app.",
+      "BlacksmithPay prototype — send and request test money, fiat-style balances plus Ethereum on Sepolia testnet with any wallet or the built-in demo wallet. TEST MONEY ONLY: no real money moves in this app.",
     start_url: "/",
     scope: "/",
     display: "standalone",

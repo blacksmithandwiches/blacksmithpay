@@ -28,7 +28,8 @@ import {
  * On top of the mock fiat balances, this store now holds:
  * - `demoEth`: mock ETH bought through the demo Exchange. It is an
  *   app-ledger number only, kept SEPARATE from the real Sepolia
- *   wallet balance (which stays read-only, read via MetaMask).
+ *   wallet balance (which stays read-only, read via the connected
+ *   wallet or the built-in demo wallet).
  * - `revenue`: every BlacksmithPay fee (exchange / transfer / payment
  *   link), accrued per fiat currency — "BlacksmithPay revenue (test)".
  * - `paymentLinks`: demo payment links created in the app.
