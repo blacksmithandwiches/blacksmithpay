@@ -8,6 +8,15 @@ MetaMask built in for crypto, and an exchange between fiat and
 crypto — with every fee shown up front, before you confirm. No
 hidden charges, ever.
 
+## Download the app
+
+- **Android:** [download the app file (.apk)](https://rockwallet-blacksmithandwiches.vercel.app/download.html) — signed release build, installs directly.
+- **iPhone / iPad:** open the demo below in Safari → Share → *Add to Home Screen* — it installs like an app.
+- **Web:** just open the demo — no install needed.
+
+**TEST MONEY ONLY.** The app moves no real money: balances are a mock
+ledger and crypto runs on the Sepolia test network.
+
 ## Try the live demos
 
 - **BlacksmithPay (main demo):** https://rockwallet-blacksmithandwiches.vercel.app
