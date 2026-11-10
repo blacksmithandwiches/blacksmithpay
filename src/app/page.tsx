@@ -68,12 +68,18 @@ export default function HomePage() {
       <TestBanner />
 
       <header className="top">
-        <div>
-          <div className="logo">
-            Blacksmith<span>Pay</span>
-          </div>
-          <div className="tagline">
-            Fiat and crypto in one wallet — prototype build.
+        <div className="brand-lockup">
+          <span className="brand-mark">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/bw-monogram.png" alt="Blacksmith & Witches monogram" />
+          </span>
+          <div>
+            <div className="logo">
+              Blacksmith<span>Pay</span>
+            </div>
+            <div className="tagline">
+              Fiat and crypto in one wallet — prototype build.
+            </div>
           </div>
         </div>
         <ConnectButton />

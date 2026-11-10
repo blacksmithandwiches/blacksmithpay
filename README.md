@@ -1,6 +1,12 @@
+<p align="center">
+  <img src="assets/bw-logo-emblem.png" alt="Blacksmith &amp; Witches emblem" width="420">
+</p>
+
 # BlacksmithPay
 
 **Send money like a message — fiat and crypto in one wallet.**
+
+*Brand marks: the Blacksmith & Witches emblem above, and the BW monogram in [`assets/bw-monogram.png`](assets/bw-monogram.png) — the app's icon and favicon art.*
 
 BlacksmithPay is a payment app with a familiar send/request flow:
 accounts with CAD and USD balances, payment links anyone can pay,

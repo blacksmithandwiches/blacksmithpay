@@ -4,7 +4,7 @@
 # version as gradle-wrapper.properties) with three VM workarounds:
 #  1. ./gradlew cannot download its distribution here: this sandbox blocks
 #     Java's raw egress (proxy CONNECT tunnels for Java fail outright), so
-#     Gradle 8.14.3 (bin) is pre-seeded at /opt/gradle-8.14.3 and invoked
+#     Gradle 8.14.3 (bin) is pre-seeded at /home/hatch/workspace/toolchain/gradle-8.14.3 and invoked
 #     directly instead of through the wrapper downloader.
 #  2. The sandbox kills *IPv4* loopback TCP (127.0.0.1) between processes,
 #     which breaks the Gradle client<->daemon socket ("Could not receive a
@@ -23,15 +23,15 @@
 TLS_DIR=/home/hatch/workspace/.gradle-tls
 if [ ! -f "$TLS_DIR/cacerts-with-egress" ]; then
   mkdir -p "$TLS_DIR"
-  cp /opt/jdk21/lib/security/cacerts "$TLS_DIR/cacerts-with-egress"
+  cp /home/hatch/workspace/toolchain/jdk21/lib/security/cacerts "$TLS_DIR/cacerts-with-egress"
   awk 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++} {print > ("'$TLS_DIR'/ca-" n ".pem")}' /run/hatch/egress-tls/ca-bundle.pem
   for f in "$TLS_DIR"/ca-*.pem; do
     grep -q "BEGIN CERTIFICATE" "$f" || continue
-    /opt/jdk21/bin/keytool -importcert -noprompt -trustcacerts \
+    /home/hatch/workspace/toolchain/jdk21/bin/keytool -importcert -noprompt -trustcacerts \
       -alias "egress-$(basename "$f")" -file "$f" \
       -keystore "$TLS_DIR/cacerts-with-egress" -storepass changeit >/dev/null 2>&1
   done
   rm -f "$TLS_DIR"/ca-*.pem
 fi
 export JAVA_TOOL_OPTIONS="-Djava.net.preferIPv6Addresses=true -Djava.io.tmpdir=/home/hatch/workspace/.tmp -Djavax.net.ssl.trustStore=$TLS_DIR/cacerts-with-egress -Djavax.net.ssl.trustStorePassword=changeit ${JAVA_TOOL_OPTIONS:-}"
-exec env JAVA_HOME="${JAVA_HOME:-/opt/jdk21}" /opt/gradle-8.14.3/bin/gradle "$@"
+exec env JAVA_HOME="${JAVA_HOME:-/home/hatch/workspace/toolchain/jdk21}" /home/hatch/workspace/toolchain/gradle-8.14.3/bin/gradle "$@"

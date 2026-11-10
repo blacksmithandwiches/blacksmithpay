@@ -5,29 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download BlacksmithPay — Android app (test money prototype)</title>
 <style>
-  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fafafa; color:#1c2733; margin:0; }
-  main { max-width:640px; margin:0 auto; padding:32px 20px 48px; }
-  h1 { font-size:28px; margin:8px 0 4px; }
-  .brand { color:#2f6fb4; font-weight:700; letter-spacing:.02em; font-size:14px; text-transform:uppercase; }
-  .warn { background:#fff4d6; border:1px solid #e3c566; border-radius:10px; padding:12px 14px; margin:18px 0; font-size:15px; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fafafa; color:#1c1a17; margin:0; }
+  header.band { background:linear-gradient(90deg,#14304f 0%,#1d4e79 100%); color:#fff; }
+  .band-inner { max-width:640px; margin:0 auto; padding:26px 20px 22px; }
+  .brand-lockup { display:flex; align-items:center; gap:14px; }
+  .brand-mark { display:inline-flex; background:#0a0a0a; border-radius:12px; padding:5px; flex:0 0 auto; }
+  .brand-mark img { display:block; width:52px; height:52px; border-radius:8px; }
+  main { max-width:640px; margin:0 auto; padding:28px 20px 48px; }
+  h1 { font-size:28px; margin:6px 0 4px; }
+  .brand { color:#bcd8f5; font-weight:700; letter-spacing:.02em; font-size:14px; text-transform:uppercase; }
+  .tagline { color:#dbe9f7; font-size:15.5px; line-height:1.55; margin:4px 0 0; }
+  .warn { background:#eef6ff; border:1px solid #14304f; border-radius:10px; padding:12px 14px; margin:18px 0; font-size:15px; }
+  a { color:#1d4e79; }
   a.btn { display:inline-block; background:#2f6fb4; color:#fff; text-decoration:none; padding:14px 22px; border-radius:10px; font-size:17px; font-weight:600; margin:10px 0 4px; }
-  a.btn:hover { background:#265d97; }
+  a.btn:hover { background:#1d4e79; }
   h2 { font-size:19px; margin:26px 0 6px; }
   ol, p { font-size:15.5px; line-height:1.55; }
-  .small { font-size:13.5px; color:#5a6a78; }
-  footer { margin-top:36px; font-size:13.5px; color:#5a6a78; }
+  .small { font-size:13.5px; color:#5a6068; }
+  footer { margin-top:36px; font-size:13.5px; color:#5a6068; }
 </style>
 </head>
 <body>
+<header class="band">
+  <div class="band-inner">
+    <div class="brand-lockup">
+      <span class="brand-mark"><img src="/bw-monogram.png" alt="Blacksmith &amp; Witches monogram"></span>
+      <div>
+        <div class="brand">Blacksmith &amp; Witches</div>
+        <h1>Download BlacksmithPay</h1>
+      </div>
+    </div>
+    <p class="tagline">Send money like a message — fiat and crypto in one wallet. This is the public prototype build.</p>
+  </div>
+</header>
 <main>
-  <div class="brand">Blacksmith &amp; Witches</div>
-  <h1>Download BlacksmithPay</h1>
-  <p>Send money like a message — fiat and crypto in one wallet. This is the public prototype build.</p>
-
   <div class="warn"><strong>TEST MONEY ONLY.</strong> This build moves no real money. Balances are a mock ledger and crypto runs on the Sepolia test network. Do not send real funds to any address in this app.</div>
 
   <h2>Android</h2>
-  <p><a class="btn" href="/downloads/BlacksmithPay.apk">Download the Android app (.apk, 3.6 MB)</a></p>
+  <p><a class="btn" href="/downloads/BlacksmithPay.apk">Download the Android app (.apk, 14.1 MB)</a></p>
   <ol>
     <li>Tap the button and let the file download.</li>
     <li>Open the file. If your phone asks, allow installs from your browser — this is the standard step for apps downloaded outside Google Play.</li>
