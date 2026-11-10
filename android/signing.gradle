@@ -1,0 +1,21 @@
+// Optional release signing for BlacksmithPay.
+// Activates ONLY when -PbspStorePassword is passed at build time.
+// keystore.properties (this folder) may hold the alias and file location;
+// passwords never live in files.
+def propsFile = rootProject.file("keystore.properties")
+if (propsFile.exists()) {
+    def props = new Properties()
+    props.load(new FileInputStream(propsFile))
+    def storePw = project.findProperty("bspStorePassword")
+    if (storePw) {
+        android.signingConfigs {
+            release {
+                storeFile new File(rootProject.projectDir, "../../store-build/blacksmithpay-release.keystore").canonicalFile
+                storePassword storePw
+                keyAlias props.getProperty("bspKeyAlias", "blacksmithpay")
+                keyPassword project.findProperty("bspKeyPassword") ?: storePw
+            }
+        }
+        android.buildTypes.release.signingConfig android.signingConfigs.release
+    }
+}

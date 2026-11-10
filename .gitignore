@@ -12,3 +12,12 @@ dist/
 *.tsbuildinfo
 *.log
 .DS_Store
+
+# Capacitor native build outputs (sources stay; products don't)
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+ios/App/build/
+ios/App/Pods/
+*.keystore

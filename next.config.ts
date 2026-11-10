@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Store builds only: `CAPACITOR_BUILD=1 npm run build` produces a static
+  // export in `out/` for the Capacitor Android/iOS shells (webDir: "out").
+  // The default build (Vercel deployment) is unchanged — no `output` key.
+  ...(process.env.CAPACITOR_BUILD === "1"
+    ? { output: "export" as const, images: { unoptimized: true } }
+    : {}),
   webpack: (config) => {
     // wagmi's connector bundle pulls in optional peers for connectors
     // BlacksmithPay never uses (Coinbase/Base account SDKs, React Native
